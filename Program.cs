@@ -7,21 +7,21 @@ namespace progmet_assignment2
 {
     class Person
     {
-        public string namn, adress, telefon, email;
+        public string name, address, phone, email;
         public Person(string N, string A, string T, string E)
         {
-            namn = N; adress = A; telefon = T; email = E;
+            name = N; address = A; phone = T; email = E;
         }
 
         public Person()
         {
             Console.WriteLine("Lägger till ny person");
             Console.Write("  1. ange namn:    ");
-            namn = Console.ReadLine();
+            name = Console.ReadLine();
             Console.Write("  2. ange adress:  ");
-            adress = Console.ReadLine();
+            address = Console.ReadLine();
             Console.Write("  3. ange telefon: ");
-            telefon = Console.ReadLine();
+            phone = Console.ReadLine();
             Console.Write("  4. ange email:   ");
             email = Console.ReadLine();
             //dict.Add(new Person(name, adress, telefon, email));
@@ -29,17 +29,17 @@ namespace progmet_assignment2
 
         public void Print()
         {
-            Console.WriteLine($"{namn}, {adress}, {telefon}, {email}");
+            Console.WriteLine($"{name}, {address}, {phone}, {email}");
         }
 
-        public void Modify(string fältAttÄndra, string nyttVärde)
+        public void Modify(string sectionToModify, string newValue)
         {
-            switch (fältAttÄndra)
+            switch (sectionToModify)
             {
-                case "namn": namn = nyttVärde; break;
-                case "adress": adress = nyttVärde; break;
-                case "telefon": telefon = nyttVärde; break;
-                case "email": email = nyttVärde; break;
+                case "namn": name = newValue; break;
+                case "adress": address = newValue; break;
+                case "telefon": phone = newValue; break;
+                case "email": email = newValue; break;
                 default: break;
             }
         }
@@ -81,7 +81,7 @@ namespace progmet_assignment2
                 }
                 else if (command == "ändra")
                 {
-                    ChangePerson(dict);
+                    ModifyPerson(dict);
                 }
                 else
                 {
@@ -102,8 +102,7 @@ namespace progmet_assignment2
                     // Console.WriteLine(line);
                     string[] word = line.Split('#');
                     // Console.WriteLine("{0}, {1}, {2}, {3}", word[0], word[1], word[2], word[3]);
-                    Person P = new Person(word[0], word[1], word[2], word[3]);
-                    dict.Add(P);
+                    dict.Add(new Person(word[0], word[1], word[2], word[3]));
                 }
             }
             Console.WriteLine("klart!");
@@ -112,15 +111,15 @@ namespace progmet_assignment2
         static void RemovePerson(List<Person> dict)
         {
             Console.Write("Vem vill du ta bort (ange namn): ");
-            string villTaBort = Console.ReadLine();
+            string toRemove = Console.ReadLine();
             int found = -1;
             for (int i = 0; i < dict.Count(); i++)
             {
-                if (dict[i].namn == villTaBort) found = i;
+                if (dict[i].name == toRemove) found = i;
             }
             if (found == -1)
             {
-                Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", villTaBort);
+                Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", toRemove);
             }
             else
             {
@@ -128,28 +127,28 @@ namespace progmet_assignment2
             }
         }
 
-        static void ChangePerson(List<Person> dict)
+        static void ModifyPerson(List<Person> dict)
         {
             Console.Write("Vem vill du ändra (ange namn): ");
-            string villÄndra = Console.ReadLine();
+            string toModify = Console.ReadLine();
             int found = -1;
             for (int i = 0; i < dict.Count(); i++)
             {
-                if (dict[i].namn == villÄndra) found = i;
+                if (dict[i].name == toModify) found = i;
             }
 
             if (found == -1)
             {
-                Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", villÄndra);
+                Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", toModify);
             }
             else
             {
                 Console.Write("Vad vill du ändra (namn, adress, telefon eller email): ");
-                string fältAttÄndra = Console.ReadLine();
-                Console.Write("Vad vill du ändra {0} på {1} till: ", fältAttÄndra, villÄndra);
-                string nyttVärde = Console.ReadLine();
+                string sectionToModify = Console.ReadLine();
+                Console.Write("Vad vill du ändra {0} på {1} till: ", sectionToModify, toModify);
+                string newValue = Console.ReadLine();
 
-                dict[found].Modify(fältAttÄndra, nyttVärde);
+                dict[found].Modify(sectionToModify, newValue);
             }
         }
     }
