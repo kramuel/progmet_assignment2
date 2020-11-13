@@ -13,6 +13,20 @@ namespace progmet_assignment2
             namn = N; adress = A; telefon = T; email = E;
         }
 
+        public Person()
+        {
+            Console.WriteLine("Lägger till ny person");
+            Console.Write("  1. ange namn:    ");
+            namn = Console.ReadLine();
+            Console.Write("  2. ange adress:  ");
+            adress = Console.ReadLine();
+            Console.Write("  3. ange telefon: ");
+            telefon = Console.ReadLine();
+            Console.Write("  4. ange email:   ");
+            email = Console.ReadLine();
+            //dict.Add(new Person(name, adress, telefon, email));
+        }
+
         public void Print()
         {
             Console.WriteLine($"{namn}, {adress}, {telefon}, {email}");
@@ -39,7 +53,8 @@ namespace progmet_assignment2
                 }
                 else if (command == "ny")
                 {
-                    NewPerson(dict);
+                    dict.Add(new Person());
+                    
                 }
                 else if (command == "ta bort")
                 {
@@ -61,6 +76,44 @@ namespace progmet_assignment2
                     Console.WriteLine("Okänt kommando: {0}", command);
                 }
             } while (command != "sluta");
+        }
+
+
+        static void LoadList(List<Person> dict)
+        {
+            Console.Write("Laddar adresslistan ... ");
+            using (StreamReader fileStream = new StreamReader(@"C:\Users\samka\addressbook.lis"))
+            {
+                while (fileStream.Peek() >= 0)
+                {
+                    string line = fileStream.ReadLine();
+                    // Console.WriteLine(line);
+                    string[] word = line.Split('#');
+                    // Console.WriteLine("{0}, {1}, {2}, {3}", word[0], word[1], word[2], word[3]);
+                    Person P = new Person(word[0], word[1], word[2], word[3]);
+                    dict.Add(P);
+                }
+            }
+            Console.WriteLine("klart!");
+        }
+
+        static void RemovePerson(List<Person> dict)
+        {
+            Console.Write("Vem vill du ta bort (ange namn): ");
+            string villTaBort = Console.ReadLine();
+            int found = -1;
+            for (int i = 0; i < dict.Count(); i++)
+            {
+                if (dict[i].namn == villTaBort) found = i;
+            }
+            if (found == -1)
+            {
+                Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", villTaBort);
+            }
+            else
+            {
+                dict.RemoveAt(found);
+            }
         }
 
         static void ChangePerson(List<Person> dict)
@@ -91,57 +144,6 @@ namespace progmet_assignment2
                     default: break;
                 }
             }
-        }
-
-        static void RemovePerson(List<Person> dict)
-        {
-            Console.Write("Vem vill du ta bort (ange namn): ");
-            string villTaBort = Console.ReadLine();
-            int found = -1;
-            for (int i = 0; i < dict.Count(); i++)
-            {
-                if (dict[i].namn == villTaBort) found = i;
-            }
-            if (found == -1)
-            {
-                Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", villTaBort);
-            }
-            else
-            {
-                dict.RemoveAt(found);
-            }
-        }
-
-        static void NewPerson(List<Person> dict)
-        {
-            Console.WriteLine("Lägger till ny person");
-            Console.Write("  1. ange namn:    ");
-            string name = Console.ReadLine();
-            Console.Write("  2. ange adress:  ");
-            string adress = Console.ReadLine();
-            Console.Write("  3. ange telefon: ");
-            string telefon = Console.ReadLine();
-            Console.Write("  4. ange email:   ");
-            string email = Console.ReadLine();
-            dict.Add(new Person(name, adress, telefon, email));
-        }
-
-        static void LoadList(List<Person> dict)
-        {
-            Console.Write("Laddar adresslistan ... ");
-            using (StreamReader fileStream = new StreamReader(@"C:\Users\samka\addressbook.lis"))
-            {
-                while (fileStream.Peek() >= 0)
-                {
-                    string line = fileStream.ReadLine();
-                    // Console.WriteLine(line);
-                    string[] word = line.Split('#');
-                    // Console.WriteLine("{0}, {1}, {2}, {3}", word[0], word[1], word[2], word[3]);
-                    Person P = new Person(word[0], word[1], word[2], word[3]);
-                    dict.Add(P);
-                }
-            }
-            Console.WriteLine("klart!");
         }
     }
 }
