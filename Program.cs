@@ -34,34 +34,11 @@ namespace progmet_assignment2
                 }
                 else if (command == "ny")
                 {
-                    Console.WriteLine("Lägger till ny person");
-                    Console.Write("  1. ange namn:    ");
-                    string name = Console.ReadLine();
-                    Console.Write("  2. ange adress:  ");
-                    string adress = Console.ReadLine();
-                    Console.Write("  3. ange telefon: ");
-                    string telefon = Console.ReadLine();
-                    Console.Write("  4. ange email:   ");
-                    string email = Console.ReadLine();
-                    dict.Add(new Person(name, adress, telefon, email));
+                    NewPerson(dict);
                 }
                 else if (command == "ta bort")
                 {
-                    Console.Write("Vem vill du ta bort (ange namn): ");
-                    string villTaBort = Console.ReadLine();
-                    int found = -1;
-                    for (int i = 0; i < dict.Count(); i++)
-                    {
-                        if (dict[i].namn == villTaBort) found = i;
-                    }
-                    if (found == -1)
-                    {
-                        Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", villTaBort);
-                    }
-                    else
-                    {
-                        dict.RemoveAt(found);
-                    }
+                    RemovePerson(dict);
                 }
                 else if (command == "visa")
                 {
@@ -73,38 +50,76 @@ namespace progmet_assignment2
                 }
                 else if (command == "ändra")
                 {
-                    Console.Write("Vem vill du ändra (ange namn): ");
-                    string villÄndra = Console.ReadLine();
-                    int found = -1;
-                    for (int i = 0; i < dict.Count(); i++)
-                    {
-                        if (dict[i].namn == villÄndra) found = i;
-                    }
-                    if (found == -1)
-                    {
-                        Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", villÄndra);
-                    }
-                    else
-                    {
-                        Console.Write("Vad vill du ändra (namn, adress, telefon eller email): ");
-                        string fältAttÄndra = Console.ReadLine();
-                        Console.Write("Vad vill du ändra {0} på {1} till: ", fältAttÄndra, villÄndra);
-                        string nyttVärde = Console.ReadLine();
-                        switch (fältAttÄndra)
-                        {
-                            case "namn": dict[found].namn = nyttVärde; break;
-                            case "adress": dict[found].adress = nyttVärde; break;
-                            case "telefon": dict[found].telefon = nyttVärde; break;
-                            case "email": dict[found].email = nyttVärde; break;
-                            default: break;
-                        }
-                    }
+                    ChangePerson(dict);
                 }
                 else
                 {
                     Console.WriteLine("Okänt kommando: {0}", command);
                 }
             } while (command != "sluta");
+        }
+
+        static void ChangePerson(List<Person> dict)
+        {
+            Console.Write("Vem vill du ändra (ange namn): ");
+            string villÄndra = Console.ReadLine();
+            int found = -1;
+            for (int i = 0; i < dict.Count(); i++)
+            {
+                if (dict[i].namn == villÄndra) found = i;
+            }
+            if (found == -1)
+            {
+                Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", villÄndra);
+            }
+            else
+            {
+                Console.Write("Vad vill du ändra (namn, adress, telefon eller email): ");
+                string fältAttÄndra = Console.ReadLine();
+                Console.Write("Vad vill du ändra {0} på {1} till: ", fältAttÄndra, villÄndra);
+                string nyttVärde = Console.ReadLine();
+                switch (fältAttÄndra)
+                {
+                    case "namn": dict[found].namn = nyttVärde; break;
+                    case "adress": dict[found].adress = nyttVärde; break;
+                    case "telefon": dict[found].telefon = nyttVärde; break;
+                    case "email": dict[found].email = nyttVärde; break;
+                    default: break;
+                }
+            }
+        }
+
+        static void RemovePerson(List<Person> dict)
+        {
+            Console.Write("Vem vill du ta bort (ange namn): ");
+            string villTaBort = Console.ReadLine();
+            int found = -1;
+            for (int i = 0; i < dict.Count(); i++)
+            {
+                if (dict[i].namn == villTaBort) found = i;
+            }
+            if (found == -1)
+            {
+                Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", villTaBort);
+            }
+            else
+            {
+                dict.RemoveAt(found);
+            }
+        }
+
+        static void NewPerson(List<Person> dict)
+        {
+            Console.WriteLine("Lägger till ny person");
+            Console.Write("  1. ange namn:    ");
+            string name = Console.ReadLine();
+            Console.Write("  2. ange adress:  ");
+            string adress = Console.ReadLine();
+            Console.Write("  3. ange telefon: ");
+            string telefon = Console.ReadLine();
+            Console.Write("  4. ange email:   ");
+            string email = Console.ReadLine();
+            dict.Add(new Person(name, adress, telefon, email));
         }
 
         static void LoadList(List<Person> dict)
