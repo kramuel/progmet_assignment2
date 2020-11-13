@@ -31,6 +31,18 @@ namespace progmet_assignment2
         {
             Console.WriteLine($"{namn}, {adress}, {telefon}, {email}");
         }
+
+        public void Modify(string fältAttÄndra, string nyttVärde)
+        {
+            switch (fältAttÄndra)
+            {
+                case "namn": namn = nyttVärde; break;
+                case "adress": adress = nyttVärde; break;
+                case "telefon": telefon = nyttVärde; break;
+                case "email": email = nyttVärde; break;
+                default: break;
+            }
+        }
     }
     class Program
     {
@@ -125,6 +137,7 @@ namespace progmet_assignment2
             {
                 if (dict[i].namn == villÄndra) found = i;
             }
+
             if (found == -1)
             {
                 Console.WriteLine("Tyvärr: {0} fanns inte i telefonlistan", villÄndra);
@@ -135,14 +148,8 @@ namespace progmet_assignment2
                 string fältAttÄndra = Console.ReadLine();
                 Console.Write("Vad vill du ändra {0} på {1} till: ", fältAttÄndra, villÄndra);
                 string nyttVärde = Console.ReadLine();
-                switch (fältAttÄndra)
-                {
-                    case "namn": dict[found].namn = nyttVärde; break;
-                    case "adress": dict[found].adress = nyttVärde; break;
-                    case "telefon": dict[found].telefon = nyttVärde; break;
-                    case "email": dict[found].email = nyttVärde; break;
-                    default: break;
-                }
+
+                dict[found].Modify(fältAttÄndra, nyttVärde);
             }
         }
     }
