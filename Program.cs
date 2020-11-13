@@ -12,6 +12,11 @@ namespace progmet_assignment2
         {
             namn = N; adress = A; telefon = T; email = E;
         }
+
+        public void Print()
+        {
+            Console.WriteLine($"{namn}, {adress}, {telefon}, {email}");
+        }
     }
     class Program
     {
@@ -42,10 +47,9 @@ namespace progmet_assignment2
                 }
                 else if (command == "visa")
                 {
-                    for (int i = 0; i < dict.Count(); i++)
+                    foreach (Person P in dict)
                     {
-                        Person P = dict[i];
-                        Console.WriteLine("{0}, {1}, {2}, {3}", P.namn, P.adress, P.telefon, P.email);
+                        P.Print();
                     }
                 }
                 else if (command == "ändra")
