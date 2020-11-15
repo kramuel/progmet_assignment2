@@ -17,7 +17,7 @@ namespace progmet_assignment2
         }
 
         /* METHOD: Person() (static)
-         * PURPOSE: Uses Console.Readline() and Console.Write() to ask and get input from user. Uses input to assign class-variables.
+         * PURPOSE: Uses Console.Readline() and Console.Write() to ask and get input from user. Uses input to assign class-variables ( attributes=?).
          * PARAMETERS: no parameters used
          * RETURN VALUE: 
          */
@@ -36,7 +36,7 @@ namespace progmet_assignment2
         }
 
         /* METHOD: Print (static)
-         * PURPOSE: Outputs name, address, phone, and email using string interpolation and Console.WriteLine)=
+         * PURPOSE: Outputs name, address, phone, and email using string interpolation and Console.WriteLine.
          * PARAMETERS: no parameters used
          * RETURN VALUE: void method
          */
@@ -49,7 +49,7 @@ namespace progmet_assignment2
          * PURPOSE: Uses a Switch-Case to appoint newValue to correct object-variable.
          * PARAMETERS: string sectionToModify: contains "name" || "adress" || "telefon" || "email" depending on what section user wants to modify
          *             string newValue: contains the new value that replaces the saved value.
-         * RETURN VALUE: returvärdets innebörd
+         * RETURN VALUE: void method
          */
         public void Modify(string sectionToModify, string newValue)
         {
